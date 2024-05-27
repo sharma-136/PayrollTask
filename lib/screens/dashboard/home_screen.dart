@@ -12,7 +12,6 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // backgroundColor: Colors.white,
         body: GetBuilder<RestaurantController>(
             init: RestaurantController(),
             builder: (controller) {
@@ -133,22 +132,26 @@ class Home extends StatelessWidget {
                     Expanded(
                       child: ListView.separated(
                         itemBuilder: (BuildContext context, int index) {
-                          return
-                             CustomListTile(
-                               productName:controller.jsonList[index]['productName'] as String,
-                               image:controller.jsonList[index]['image'],
-                               restaurantName:controller.jsonList[index]['restaurantName'],
-                               rating:controller.jsonList[index]['rating'] as String,
-                               location:controller.jsonList[index]['location'],
-                               away:controller.jsonList[index]['away']
-                             );
+                          return CustomListTile(
+                              productName: controller.jsonList[index]
+                                  ['productName'] as String,
+                              image:
+                                  controller.jsonList[index]['image'] as String,
+                              restaurantName: controller.jsonList[index]
+                                  ['restaurantName'] as String,
+                              rating: controller.jsonList[index]['rating']
+                                  .toDouble(),
+                              location: controller.jsonList[index]['location']
+                                  as String,
+                              away:
+                                  controller.jsonList[index]['away'] as String);
                         },
                         separatorBuilder: (BuildContext context, int index) {
                           return const SizedBox(height: 20);
                         },
-                        itemCount: 10,
+                        itemCount: controller.jsonList.length,
                       ),
-                    )
+                    ),
                   ],
                 ),
               );

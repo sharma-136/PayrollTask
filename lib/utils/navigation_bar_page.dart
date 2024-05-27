@@ -13,6 +13,7 @@ class NavigationPage extends StatelessWidget {
 
   final BottomNavigationController bottomNavigationController =
       Get.put(BottomNavigationController());
+
   final screenPage = [Home(), BagScreen(), OrderScreen(), ProfileScreen()];
 
   @override

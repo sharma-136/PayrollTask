@@ -19,11 +19,15 @@ class RestaurantController extends GetxController {
     Dio dio = Dio();
     print('start3');
 
-    final response = await dio.get('https://mocki.io/v1/39feb4e4-6ffb-4fa2-b1cd-a731d5b9d539');
+    final response = await dio.get('https://mocki.io/v1/2b599b7e-1886-4c21-a42e-d34e56fffcbc');
     print('start4');
     print(response.statusCode);
 
      jsonList=response.data as List;
+     update();
+     print(jsonList);
+     print('imagelink ${jsonList[2]}');
+    print('imagelink ${jsonList[3]}');
 
     print('length ${jsonList.length}');
     // print('start5 $res');
