@@ -20,7 +20,8 @@ class CategoryController extends GetxController {
 
   List<Products> productsList = [];
   Map mp={};
-
+  List category=[];
+  List pro = [];
   Future fetchCategory() async {
     print('cat3');
 
@@ -33,7 +34,9 @@ class CategoryController extends GetxController {
 
     productsList = jsonList.map((json) => Products.fromJson(json)).toList();
 
-    // Album.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+    // widget.categories.map((category) => Tab(text: category.catName)).toList(),
+    // widget.categories.map((category) => FoodListView(foodItems: category.products)).toList(),
+
 
     print('creatine ${jsonList}');
     print('${jsonList[0]['cat_name']}');
@@ -42,11 +45,26 @@ class CategoryController extends GetxController {
       mp[v['Cat_name']]=v;
     }
 
-    // for(var v in mp.values){
-    //   print('da$v');
-    // }
-    print('tested${mp}');
 
+    print('tested${mp}');
+    // Map<String, dynamic> jsonMap = jsonDecode(mp as String);
+    // Map<String, Products> categories = jsonMap.map((key, value) => MapEntry(key, Products.fromJson(value)));
+    // print('dread${categories}');
+
+    List l=[];
+    for(var v in mp.values){
+      l.add(v);
+    }
+   // List category =[];
+   //  List pro = [];
+    mp.forEach((key, value) {
+      category.add(value['Cat_name']);
+      pro.add(value['Product']);
+      print('typc${value['Cat_name']}');
+      print('typy${value['Product']}');
+    });
+    print('deeee${category}');
+    print('beeee${pro}');
 
    update();
   }

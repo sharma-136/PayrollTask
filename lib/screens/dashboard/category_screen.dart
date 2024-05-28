@@ -85,38 +85,65 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const TabBar(
+                       TabBar(
                         indicatorColor: ConstantColors.peach,
-                        labelPadding: EdgeInsets.all(2),
+                        labelPadding: const EdgeInsets.all(2),
                         indicatorSize: TabBarIndicatorSize.tab,
-                        tabs: [
-                          Tab(
-                            text: 'combo',
-                          ),
-                          Tab(
-                            text: 'classic',
-                          ),
-                          Tab(
-                            text: 'primium',
-                          ),
-                          Tab(
-                            text: 'sides',
-                          ),
-                          Tab(
-                            text: 'drinks',
-                          )
-                        ],
+                        tabs: controller.category.map((e) => Tab(text: e,)).toList(),
+                        // [
+                        //   Tab(
+                        //     text: 'combo',
+                        //   ),
+                        //   Tab(
+                        //     text: 'classic',
+                        //   ),
+                        //   Tab(
+                        //     text: 'primium',
+                        //   ),
+                        //   Tab(
+                        //     text: 'sides',
+                        //   ),
+                        //   Tab(
+                        //     text: 'drinks',
+                        //   )
+                        // ],
                       ),
                       SizedBox(
                         height: 300,
-                        child: TabBarView(children: [
-                          findCategory('ComboS', controller),
-                          findCategory('Classic', controller),
-                          findCategory('Premium', controller),
-                          findCategory('Sides', controller),
-                          findCategory('Drinks', controller),
-                        ]),
-                      )
+                        child:
+
+                        TabBarView(
+                          children: controller.category.asMap().entries.map((entry) {
+                            int index = entry.key;
+                            String cat = entry.value;
+                            List products = controller.pro[index];
+
+                            return ListView.builder(
+                              itemCount: products.length,
+                              itemBuilder: (context, index) {
+                                final product = products[index];
+                                return ListTile(
+                                  leading: CircleAvatar(
+                                      radius: 40,
+                                      child: Image.network(product['ProductImage'])),
+                                  title: Text(product['Productname']),
+                                  subtitle: Text(product['ProductDescription']),
+                                  trailing: Text('\$${product['Price']}'),
+                                );
+                              },
+                            );
+                          }).toList(),
+                        // TabBarView(children: [
+                        //   findCategory('ComboS', controller),
+                        //   findCategory('Classic', controller),
+                        //   findCategory('Premium', controller),
+                        //   findCategory('Sides', controller),
+                        //   findCategory('Drinks', controller),
+                        // ]
+                        //
+                        // ),
+                      ),
+                      ),
                     ],
                   ),
                 ),
@@ -143,7 +170,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
           // print('get12345${product.productDescription}');
           print('sample1');
          return InkWell(
-           onTap: (){SelectedItemScreen()},
+           onTap: (){
+             Get.to(SelectedItemScreen());},
            child: ListTile(
              leading: CircleAvatar(
                  radius:40,
